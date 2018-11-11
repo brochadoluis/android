@@ -1,8 +1,8 @@
 # Android Projects
 
-A repository with android projects for the purpose of learning.
+A repository with android projects for the purpose of learning android and kotlin.
 
 ## Dinner Decider
 
-Simple app to help decide what to chose for dinner.
-Make with kotlin in android studio v3.2.1
+App to help decide what to chose for dinner.
+Make with kotlin in android studio v3.2.1 for Android 5.0 and above.
