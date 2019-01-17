@@ -274,3 +274,6 @@ cmake-build-*/
 
 
 # End of https://www.gitignore.io/api/kotlin,android,intellij,androidstudio
+
+# Ignore DevProfile project
+DevProfile/*
