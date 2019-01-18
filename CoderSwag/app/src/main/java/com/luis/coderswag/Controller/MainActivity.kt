@@ -2,23 +2,29 @@ package com.luis.coderswag.Controller
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.luis.coderswag.Adapters.CategoryAdapter
-import com.luis.coderswag.Model.Category
+import android.support.v7.widget.LinearLayoutManager
+import com.luis.coderswag.Adapters.CategoryRecycleAdapter
 import com.luis.coderswag.R
 import com.luis.coderswag.Services.DataService
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var adapter : CategoryAdapter
+    lateinit var adapter : CategoryRecycleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapter = CategoryAdapter(this, DataService.categories)
+        adapter = CategoryRecycleAdapter(this, DataService.categories)
         categoryListView.adapter = adapter
+
+        val  layoutManager = LinearLayoutManager(this)
+        categoryListView.layoutManager = layoutManager
+        /* If cells do not change sizes, i.e. not dynamically changing
+        * this ca be done for optimization on recyclerView*/
+        categoryListView.setHasFixedSize(true)
+
 
 //        does not work with recyclerViews
 //        categoryListView.setOnItemClickListener { adapterView, view, i, l ->
