@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.android.volley.toolbox.Volley
 import com.luis.smack.R
 import com.luis.smack.Services.AuthService
 import kotlinx.android.synthetic.main.activity_create_user.*
@@ -48,8 +49,18 @@ class CreateUserActivity : AppCompatActivity() {
     }
 
     fun createUserClicked(view: View) {
-        AuthService.register(this, "luis@luis.com", "1234") {
-            complete -> if(complete) println("completed!")
+        val username = createUsernameText.text.toString()
+        val email = createEmailText.text.toString()
+        val password = createPasswordText.text.toString()
+        AuthService.register(this, email, password) {
+            registerSuccess -> if(registerSuccess) {
+                AuthService.login(this, email, password) {
+                    loginSuccess -> if(loginSuccess) {
+                    println(AuthService.authToken)
+                    println(AuthService.userEmail)
+                    }
+                }
+            }
         }
     }
 }
