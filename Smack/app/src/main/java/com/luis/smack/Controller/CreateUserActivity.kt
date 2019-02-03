@@ -52,12 +52,14 @@ class CreateUserActivity : AppCompatActivity() {
         val username = createUsernameText.text.toString()
         val email = createEmailText.text.toString()
         val password = createPasswordText.text.toString()
+
         AuthService.register(this, email, password) {
             registerSuccess -> if(registerSuccess) {
                 AuthService.login(this, email, password) {
                     loginSuccess -> if(loginSuccess) {
-                    println(AuthService.authToken)
-                    println(AuthService.userEmail)
+                        AuthService.createUser(this, username, email, userAvatar, avatarColor){ createSuccess ->
+                            if(createSuccess) finish()
+                        }
                     }
                 }
             }
