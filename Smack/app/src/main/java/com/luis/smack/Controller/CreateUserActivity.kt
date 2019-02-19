@@ -60,16 +60,20 @@ class CreateUserActivity : AppCompatActivity() {
         val password = createPasswordText.text.toString()
 
         if (username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-            AuthService.register(this, email, password) {
-                    registerSuccess -> if(registerSuccess) {
-                AuthService.login(this, email, password) {
-                        loginSuccess -> if(loginSuccess) {
-                    AuthService.createUser(this, username, email, userAvatar, avatarColor){ createSuccess ->
-                        if(createSuccess) {
-                            val userDataChange: Intent = Intent(BROADCAST_USER_DATA_CHANGE)
-                            LocalBroadcastManager.getInstance(this).sendBroadcast(userDataChange)
-                            enableSpinner(false)
-                            finish()
+            AuthService.register(this, email, password) { registerSuccess ->
+                if(registerSuccess) {
+                    AuthService.login(this, email, password) { loginSuccess ->
+                        if(loginSuccess) {
+                            AuthService.createUser(this, username, email, userAvatar, avatarColor){ createSuccess ->
+                                if(createSuccess) {
+                                    val userDataChange: Intent = Intent(BROADCAST_USER_DATA_CHANGE)
+                                    LocalBroadcastManager.getInstance(this).sendBroadcast(userDataChange)
+                                    enableSpinner(false)
+                                    finish()
+                                } else {
+                                    errorToast()
+                                }
+                            }
                         } else {
                             errorToast()
                         }
@@ -77,10 +81,6 @@ class CreateUserActivity : AppCompatActivity() {
                 } else {
                     errorToast()
                 }
-                }
-            } else {
-                errorToast("Make sure username, email and password are filled in.")
-            }
             }
         }
     }
@@ -97,8 +97,13 @@ class CreateUserActivity : AppCompatActivity() {
         backgroundColorBtn.isEnabled = !enable
     }
 
-    fun errorToast(errorMessage: String = "Something went wrong, please try again."){
+    /*fun errorToast(errorMessage: String = "Something went wrong, please try again."){
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+        enableSpinner(false)
+    }*/
+
+    fun errorToast(){
+        Toast.makeText(this, "Something went wrong, please try again.", Toast.LENGTH_LONG).show()
         enableSpinner(false)
     }
 }
