@@ -54,12 +54,12 @@ class CreateUserActivity : AppCompatActivity() {
     }
 
     fun createUserClicked(view: View) {
-        enableSpinner(true)
         val username = createUsernameText.text.toString()
         val email = createEmailText.text.toString()
         val password = createPasswordText.text.toString()
 
         if (username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
+            enableSpinner(true)
             AuthService.register(this, email, password) { registerSuccess ->
                 if(registerSuccess) {
                     AuthService.login(this, email, password) { loginSuccess ->
