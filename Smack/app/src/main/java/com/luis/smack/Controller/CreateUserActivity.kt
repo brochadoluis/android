@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.support.v4.content.LocalBroadcastManager
 import android.view.View
 import android.widget.Toast
-import com.android.volley.toolbox.Volley
 import com.luis.smack.R
 import com.luis.smack.Services.AuthService
 import com.luis.smack.Utilities.BROADCAST_USER_DATA_CHANGE
@@ -60,11 +59,11 @@ class CreateUserActivity : AppCompatActivity() {
 
         if (username.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
             enableSpinner(true)
-            AuthService.register(this, email, password) { registerSuccess ->
+            AuthService.register(email, password) { registerSuccess ->
                 if(registerSuccess) {
-                    AuthService.login(this, email, password) { loginSuccess ->
+                    AuthService.login(email, password) { loginSuccess ->
                         if(loginSuccess) {
-                            AuthService.createUser(this, username, email, userAvatar, avatarColor){ createSuccess ->
+                            AuthService.createUser(username, email, userAvatar, avatarColor){ createSuccess ->
                                 if(createSuccess) {
                                     val userDataChange: Intent = Intent(BROADCAST_USER_DATA_CHANGE)
                                     LocalBroadcastManager.getInstance(this).sendBroadcast(userDataChange)
