@@ -2,7 +2,6 @@ package com.luis.smack.Controller
 
 import android.content.Context
 import android.content.Intent
-import android.hardware.input.InputManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,7 +9,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.luis.smack.R
 import com.luis.smack.Services.AuthService
-import kotlinx.android.synthetic.main.activity_create_user.*
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
