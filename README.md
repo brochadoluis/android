@@ -1,6 +1,7 @@
 # Android Projects
 
-A repository with android projects for the purpose of learning android and kotlin. The projects in this repository are not mine, I am following an course from Udemy.
+A repository with android projects for the purpose of learning android and kotlin. 
+Disclaimer: The projects in this repository are not mine, I am following an course from Udemy.
 
 ## Dinner Decider
 
